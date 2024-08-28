@@ -1,16 +1,39 @@
+using Microsoft.EntityFrameworkCore;
+using ToDoApplicationAPI.Data;
+using ToDoApplicationAPI.Models;
+using ToDoApplicationAPI.Repositories;
+
 namespace TodoApplicationTest
 {
-    public class Tests
+    public class ToDoRepositoryTests
     {
-        [SetUp]
-        public void Setup()
-        {
+        private IToDoRepository _repository;
+
+        public ToDoRepositoryTests(IToDoRepository repository)
+        { 
+            _repository = repository; 
         }
 
+
         [Test]
-        public void Test1()
+        public void Add_ShouldAddNewTodo()
         {
-            Assert.Pass();
+            // Arrange
+            var todo = new ToDo
+            {
+                Title = "Test ToDo",
+                IsCompleted = false
+            };
+
+            // Act
+            _repository.Add(todo);
+            var result = _repository.GetById(1);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Id);
+            Assert.AreEqual("Test ToDo", result.Title);
+            Assert.IsFalse(result.IsCompleted);
         }
     }
 }

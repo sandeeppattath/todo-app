@@ -8,7 +8,7 @@ using ToDoApplicationAPI.Repositories;
 namespace ToDoApplicationAPI.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class TodoController : ControllerBase
     {
@@ -33,7 +33,7 @@ namespace ToDoApplicationAPI.Controllers
         }
 
         // POST api/<TodoController>
-        [HttpPost]
+        [HttpPost()]
         public void Post([FromBody] ToDo value)
         {
             if(TryValidateModel(value))
@@ -43,11 +43,11 @@ namespace ToDoApplicationAPI.Controllers
         }
 
         // PUT api/<TodoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ToDo value)
+        [HttpPost("complete")]
+        public void Complete([FromBody] int id)
         {
-            value.Id = id;
-            _toDoRepository.Update(value);
+            
+            _toDoRepository.Complete(id);
         }
 
         // DELETE api/<TodoController>/5

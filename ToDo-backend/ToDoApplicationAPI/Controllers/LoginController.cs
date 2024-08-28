@@ -21,7 +21,7 @@ namespace ToDoApplicationAPI.Controllers
         public IActionResult Login([FromBody] LoginRequest request)
         {
             // Validate the user credentials 
-            if (request.Username == "testuser" && request.Password == "testpassword")
+            if (request.Username == "user" && request.Password == "password")
             {
                 var claims = new[]
                 {

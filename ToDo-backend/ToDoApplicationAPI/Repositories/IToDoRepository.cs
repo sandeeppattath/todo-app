@@ -7,7 +7,7 @@ namespace ToDoApplicationAPI.Repositories
         IEnumerable<ToDo> GetAll();
         ToDo GetById(int id);
         void Add(ToDo todo);
-        bool Update(ToDo todo);
+        bool Complete(int todoId);
         bool Delete(int id);
     }
 }

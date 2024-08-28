@@ -8,6 +8,9 @@ namespace ToDoApplicationAPI.Repositories
     {
         private readonly ToDoDbContext _dbContext;
 
+        public ToDoRepository()
+        {
+        }
         public ToDoRepository(ToDoDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -24,13 +27,12 @@ namespace ToDoApplicationAPI.Repositories
             _dbContext.SaveChanges();
         }
 
-        public bool Update(ToDo todo)
+        public bool Complete(int id)
         {
-            var existing = GetById(todo.Id);
+            var existing = GetById(id);
             if (existing != null)
             {
-                existing.Title = todo.Title;
-                existing.IsCompleted = todo.IsCompleted;
+                existing.IsCompleted = true;
 
                 _dbContext.ToDos.Update(existing);
                 _dbContext.SaveChanges();
